@@ -1,9 +1,16 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue';
-
-console.log('[App.vue]', `Hello world from Electron ${process.versions.electron}!`);
-</script>
-
 <template>
-	<h1 class="text-4xl">App running Electron + Vite + Vue 3</h1>
+    <component :is="layout">
+        <RouterView />
+    </component>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+
+import LayoutDefault from './layouts/LayoutDefault.vue'
+
+const route = useRoute()
+
+const layout = computed(() => route.meta.layout ?? LayoutDefault)
+</script>
