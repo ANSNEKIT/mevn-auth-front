@@ -4,3 +4,14 @@ export interface IUser {
     name: string
     createdAt: Date
 }
+
+export interface ILogin {
+    email: string
+    name: string
+}
+
+export interface IRegister {
+    email: string
+    name: string
+    password: string
+}
