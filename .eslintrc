@@ -1,0 +1,35 @@
+{
+    "root": true,
+    "extends": [
+        "plugin:vue/vue3-essential",
+        "eslint:recommended",
+        "@vue/eslint-config-typescript",
+        "@vue/eslint-config-prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "overrides": [
+        {
+          "files": ["*.config.js"],
+          "env": {
+            "node": true
+          }
+        }
+      ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "trailingComma": "all",
+          "useTabs": true,
+          "tabWidth": 4,
+          "semi": true,
+          "singleQuote": true,
+          "bracketSpacing": true,
+          "printWidth": 100,
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  }
