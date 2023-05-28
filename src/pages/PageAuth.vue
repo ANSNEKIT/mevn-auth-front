@@ -74,7 +74,6 @@ if (authStore.isAuth) {
 
 const onLogin = handleSubmit(async (values) => {
     const data = await authStore.fetchLogin(values)
-    console.log(1111, data)
 
     if (!data.token) {
         alert('Не удалось авторизоваться')

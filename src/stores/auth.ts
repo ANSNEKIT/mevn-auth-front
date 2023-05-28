@@ -20,6 +20,7 @@ export const useAuthStore = defineStore('auth', {
                 console.log(error)
                 this.isAuth = false
                 this.token = null
+                return null
             }
         },
         async fetchRegistration(payload: IRegister) {
@@ -28,11 +29,26 @@ export const useAuthStore = defineStore('auth', {
                 if (data.token) {
                     this.isAuth = true
                     this.token = data.token
+                    return data
                 }
             } catch (error) {
                 console.log(error)
                 this.isAuth = false
                 this.token = null
+                return null
+            }
+        },
+        async fetchUserInfo(): Promise<any> {
+            try {
+                const { data } = await axios.get('/info')
+                if (data.success) {
+                    this.isAuth = true
+                    return data
+                }
+            } catch (error) {
+                console.log(error)
+                this.isAuth = false
+                return null
             }
         },
         async fetchLogout() {

@@ -10,8 +10,14 @@ const yupEmail = yup
 const yupPassword = yup
     .string()
     .required('Обязательное поле')
-    .min(8, 'Значение должно быть больше 8')
-    .max(20, 'Значение должно быть меньше 20')
+    .min(8, 'Пароль должен содежать от 8 символов')
+    .max(20, 'Пароль должен содержать не более 20 символов')
     .typeError('Пароль обязательное поле')
 
-export { yupEmail, yupPassword }
+const yupName = yup
+    .string()
+    .trim('Обязательное поле')
+    .required('Обязательное поле')
+    .matches(/^[A-ZА-Яa-zа-яё\s-]+$/i, 'Недопустимый символ')
+
+export { yupEmail, yupPassword, yupName }

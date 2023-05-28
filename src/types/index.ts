@@ -15,3 +15,10 @@ export interface IRegister {
     name: string
     password: string
 }
+
+export interface RegisterForm {
+    email: string
+    firstName: string
+    lastName: string
+    password: string
+}
