@@ -1,73 +1,94 @@
-# electron-vite-vue
+<!-- prettier-ignore -->
+# MEVN-auth-front
 
-🥳 Really simple `Electron` + `Vue` + `Vite` boilerplate.
+Cтек (Vue 3 + Typescript + Vue router 4 + Pinia + TailwindCSS)
 
-<!-- [![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite) -->
-<!-- [![Netlify Status](https://api.netlify.com/api/v1/badges/ae3863e3-1aec-4eb1-8f9f-1890af56929d/deploy-status)](https://app.netlify.com/sites/electron-vite/deploys) -->
-<!-- [![GitHub license](https://img.shields.io/github/license/caoxiemeihao/electron-vite-vue)](https://github.com/electron-vite/electron-vite-vue/blob/main/LICENSE) -->
-<!-- [![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/electron-vite-vue?color=fa6470)](https://github.com/electron-vite/electron-vite-vue) -->
-<!-- [![GitHub forks](https://img.shields.io/github/forks/caoxiemeihao/electron-vite-vue)](https://github.com/electron-vite/electron-vite-vue) -->
-[![GitHub Build](https://github.com/electron-vite/electron-vite-vue/actions/workflows/build.yml/badge.svg)](https://github.com/electron-vite/electron-vite-vue/actions/workflows/build.yml)
-[![GitHub Discord](https://img.shields.io/badge/chat-discord-blue?logo=discord)](https://discord.gg/sRqjYpEAUK)
+## Особенности
 
-## Features
+-   Подключены prettier и ESlint
+-   В приложении есть регистрация и страница для входа.
+-   Храниние токена авторизации в LocalStorage. Реализован выход из приложения
+-   Добавлены валидация формы входа и регистрации yup
+-   Стилизация с помощью фреймворка TailwindCSS
+-   Подключена UI компоненты primevue
 
-📦 Out of the box  
-🎯 Based on the official [template-vue-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-vue-ts), less invasive  
-🌱 Extensible, really simple directory structure  
-💪 Support using Node.js API in Electron-Renderer  
-🔩 Support C/C++ native addons  
-🖥 It's easy to implement multiple windows  
+---
 
-## Quick Start
+## API
 
-```sh
-npm create electron-vite
-```
+АПИ доступен по ссылке https://mevn-auth-back.onrender.com
 
-<!-- [![quick-start](https://asciinema.org/a/483731.svg)](https://asciinema.org/a/483731) -->
+### Регистрация
 
-![electron-vite-vue.gif](/electron-vite-vue.gif)
-
-## Debug
-
-![electron-vite-react-debug.gif](https://github.com/electron-vite/electron-vite-react/blob/main/electron-vite-react-debug.gif?raw=true)
-
-## Directory
-
-```diff
-+ ├─┬ electron
-+ │ ├─┬ main
-+ │ │ └── index.ts    entry of Electron-Main
-+ │ └─┬ preload
-+ │   └── index.ts    entry of Preload-Scripts
-  ├─┬ src
-  │ └── main.ts       entry of Electron-Renderer
-  ├── index.html
-  ├── package.json
-  └── vite.config.ts
-```
-
-<!--
-## Be aware
-
-🚨 By default, this template integrates Node.js in the Renderer process. If you don't need it, you just remove the option below. [Because it will modify the default config of Vite](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
-
-```diff
-# vite.config.ts
-
-export default {
-  plugins: [
--   // Use Node.js API in the Renderer-process
--   renderer({
--     nodeIntegration: true,
--   }),
-  ],
+POST /signup
+body {
+email,
+name,
+password
 }
-```
--->
 
-## FAQ
+Response: Получаем токен пользователя
 
-- [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
-- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
+### Авторизация
+
+POST /signin
+body {
+email,
+password
+}
+
+Response: Получаем токен пользователя
+
+### Инфо
+
+GET /info
+HEADER: authorization: Bearer <token>
+
+Response: Получаем имя, логин, email пользователя
+
+### Логаут
+
+GET /logout
+HEADER: authorization: Bearer <token>
+
+Response: Получаем статус 200
+
+### Список пользователей
+
+POST /users
+HEADER: authorization: Bearer <token>
+
+Response: Получаем список пользователей
+
+### Пинг
+
+GET /ping
+
+Response: Получаем статус 200
+
+---
+
+## Запуск и сборка проекта
+
+### Установка зависимостей
+
+`npm i`
+
+### Запуск сервера
+
+`npm run start`
+
+### Запуск сервера в режиме разработки
+
+`npm run dev:inspect`
+
+Запуск build
+
+`npm run build`
+
+В директории проекта будет создана папка release. Для Linux OS будут доступны файлы c расширением .AppImage .snap
+Запустите файл .AppImage
+
+Запуск lint
+
+`npm run lint`
